@@ -301,6 +301,14 @@
     .autofill-btn:active {
       transform: translateY(0);
     }
+    .autofill-warning-tip {
+      font-size: 10.5px;
+      color: #b45309;
+      text-align: center;
+      margin-top: 4px;
+      line-height: 1.2;
+      opacity: 0.9;
+    }
 
     /* 快速微调确认表单 */
     .capture-form {
@@ -583,6 +591,7 @@
             <span>⚡</span>
             <span>一键填充当前页面</span>
           </button>
+          <div class="autofill-warning-tip">功能不完善，请逐条核对</div>
           
           <div class="capture-form hidden" id="aja-capture-form">
             <div class="title-hint" id="cap-title-hint" title="点击复制网页标题">
