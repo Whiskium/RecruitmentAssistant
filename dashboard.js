@@ -1,5 +1,5 @@
 /**
- * 秋招求职与简历中枢看板 - 核心业务逻辑
+ * 校园招聘助手系统 - 核心业务逻辑
  * 支持投递追踪、可视化简历库编辑、数据安全与离线 OCR 识别
  */
 
@@ -15,23 +15,23 @@
 
   // 默认示例简历种子
   const DEFAULT_RESUME = {
-    "优先信息": {
-      "身份证": "110101199801011234",
-      "手机": "13800138000",
-      "邮箱": "job_hunter@example.com",
-      "微信号": "wechat_demo",
-      "现居地": "北京市海淀区",
-      "求职意向": "AI产品经理 / 算法工程师"
-    },
-    "基本信息": {
-      "姓名": "李明",
-      "性别": "男",
-      "出生年月": "1999-06",
-      "政治面貌": "共青团员",
-      "籍贯": "山东省济南市",
-      "紧急联系人": "李华 (父子 13900139000)",
-      "自我评价": "具备扎实的AI技术认知与产品化落地经验，深度理解大语言模型、多智能体交互机制。自驱力强，跨部门沟通流畅，多次主导高校与工业级产学研项目。"
-    },
+    "基本信息": [
+      ["姓名", "李明"],
+      ["性别", "男"],
+      ["出生年月", "1999-06"],
+      ["政治面貌", "共青团员"],
+      ["籍贯", "山东省济南市"],
+      ["紧急联系人", "李华 (父子 13900139000)"],
+      ["自我评价", "具备扎实的AI技术认知与产品化落地经验，深度理解大语言模型、多智能体交互机制。自驱力强，跨部门沟通流畅，多次主导高校与工业级产学研项目。"]
+    ],
+    "其他信息": [
+      ["身份证", "110101199801011234"],
+      ["手机", "13800138000"],
+      ["邮箱", "job_hunter@example.com"],
+      ["微信号", "wechat_demo"],
+      ["现居地", "北京市海淀区"],
+      ["求职意向", "AI产品经理 / 算法工程师"]
+    ],
     "教育经历": [
       {
         "_rowName": "硕士",
@@ -65,7 +65,19 @@
         "开始": "2025-06",
         "结束": "至今",
         "证明人": "王主管",
-        "岗位职责": "1. 主导智能广告生成 Agent 方案设计，构建提示词工程与评估指标集；\n2. 协同算法团队完成模型微调与端到端延迟优化，CTR 提升 12.4%；\n3. 撰写多份高保真 PRD 与交互原型，推动敏捷迭代上线。"
+        "证明人电话": "139XXXXXXXX",
+        "岗位职责": "1. 主导智能广告生成 Agent 方案设计，构建提示词工程与评估指标集；\n2. 协同算法团队完成模型微调与端到端延迟优化，CTR 提升 12.4%；\n3. 撰写多份高保真 PRD 与交互原型，推动敏捷迭代上线。",
+        "实习收获": "1. 深入理解商业化广告的业务逻辑与数据驱动决策方法；\n2. 系统掌握大模型产品化落地的全流程，从 Prompt 工程到模型评估；\n3. 提升了跨部门（算法/工程/运营）协同沟通能力。"
+      }
+    ],
+    "校园经历": [
+      {
+        "_rowName": "学生会",
+        "组织": "浙江大学计算机学院学生会",
+        "职务": "部长",
+        "开始": "2024-09",
+        "结束": "2025-06",
+        "主要工作": "1. 统筹举办学院科技文化节，覆盖 500+ 人次；\n2. 组织策划校企合作技术沙龙 8 场，对接字节跳动、阿里等企业。"
       }
     ],
     "项目经历": [
@@ -79,11 +91,46 @@
         "技术栈": "Python, LLM Agent, LangChain, Vue.js, FastAPI"
       }
     ],
-    "竞赛与技能": {
-      "英语水平": "CET-6 (598分) / 英语流利",
-      "专业技能": "Python, SQL, Figma, Axure, Prompt Engineering, Agent Architecture",
-      "学术竞赛": "全国大学生数学建模竞赛一等奖、互联网+大学生创新创业大赛银奖"
-    }
+    "奖励荣誉": [
+      {
+        "_rowName": "国家奖学金",
+        "获奖年月": "2024-10",
+        "荣誉名称": "国家奖学金",
+        "奖励级别": "国家级",
+        "说明": "综合成绩排名专业前1%，获教育部颁发国家奖学金"
+      },
+      {
+        "_rowName": "优秀毕业生",
+        "获奖年月": "2023-06",
+        "荣誉名称": "校优秀毕业生",
+        "奖励级别": "校级",
+        "说明": "本科期间综合表现优异，获评校级优秀毕业生荣誉称号"
+      }
+    ],
+    "家庭成员": [
+      {
+        "_rowName": "父亲",
+        "姓名": "李建国",
+        "与本人关系": "父子",
+        "出生年月": "1972-03",
+        "工作单位": "中国铁路济南局集团有限公司",
+        "职务": "高级工程师"
+      },
+      {
+        "_rowName": "母亲",
+        "姓名": "王秀英",
+        "与本人关系": "母子",
+        "出生年月": "1973-08",
+        "工作单位": "山东省济南市第一中学",
+        "职务": "英语教师"
+      }
+    ],
+    "技能证书": [
+      ["英语水平", "CET-6 (598分) / 英语流利"],
+      ["专业技能", "Python, SQL, Figma, Axure, Prompt Engineering, Agent Architecture"],
+      ["学术竞赛", "全国大学生数学建模竞赛一等奖、互联网+大学生创新创业大赛银奖"]
+    ],
+    "_sectionOrder": ["基本信息", "其他信息", "教育经历", "实习经历", "校园经历", "项目经历", "奖励荣誉", "家庭成员", "技能证书"]
   };
 
   // 默认示例投递记录
@@ -100,6 +147,7 @@
   // ================= 全局状态 =================
   let records = [];
   let currentResume = DEFAULT_RESUME;
+  let resumeSectionOrder = Object.keys(DEFAULT_RESUME);
   let editingRecordId = null;
   let ocrWorker = null;
   let ocrFile = null;
@@ -122,19 +170,38 @@
 
   // ================= 统一存储适配层 =================
   async function storageGet(key) {
-    if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local) {
-      const res = await chrome.storage.local.get([key]);
-      return res[key];
-    }
+    // 优先读取 localStorage，因为 storageSet 总是先写 localStorage，
+    // 确保读到的一定是最新数据，避免 chrome.storage.local 有旧数据时返回旧值
     const raw = localStorage.getItem(key);
-    return raw ? JSON.parse(raw) : null;
+    if (raw) {
+      try {
+        return JSON.parse(raw);
+      } catch (e) {
+        console.warn('localStorage 解析失败，尝试 chrome.storage', e);
+      }
+    }
+    if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local) {
+      try {
+        const res = await chrome.storage.local.get([key]);
+        if (res[key] !== undefined) return res[key];
+      } catch (e) {
+        console.warn('chrome.storage.local 读取失败', e);
+      }
+    }
+    return null;
   }
 
   async function storageSet(key, value) {
+    const json = JSON.stringify(value);
+    localStorage.setItem(key, json);
+    // 同步写 chrome.storage.local，供 content.js 跨上下文读取
     if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local) {
-      await chrome.storage.local.set({ [key]: value });
-    } else {
-      localStorage.setItem(key, JSON.stringify(value));
+      try {
+        await chrome.storage.local.set({ [key]: value });
+        console.log('[storageSet] chrome.storage.local 写入成功，key:', key);
+      } catch (e) {
+        console.warn('chrome.storage.local 写入失败，已使用 localStorage 兜底', e);
+      }
     }
   }
 
@@ -192,8 +259,8 @@
 
   // ================= 选项卡切换逻辑 =================
   const tabs = {
-    'records-tab': { kicker: 'JOB TRACKING DASHBOARD', title: '投递追踪看板', subtitle: '全面监控网申进度、面试安排与全链路阶段流转', showActions: true },
-    'resume-tab': { kicker: 'RESUME PROFILE MANAGER', title: '我的简历资料库', subtitle: '集中维护个人信息与多段经历，实时同步至网页端快速填报', showActions: false },
+    'records-tab': { kicker: 'JOB TRACKING', title: '投递追踪', subtitle: '全面监控网申进度、面试安排与全链路阶段流转', showActions: true },
+    'resume-tab': { kicker: 'MY RESUME', title: '我的简历', subtitle: '集中维护个人信息与多段经历，实时同步至网页端快速填报', showActions: false },
     'safety-tab': { kicker: 'LOCAL DATA & PRIVACY', title: '数据安全与备份', subtitle: '100% 浏览器本地存储保护，支持备份导出与快照回滚', showActions: false }
   };
 
@@ -332,16 +399,16 @@
               <span class="comp-pos">${escapeHtml(r.position)}</span>
             </div>
           </td>
-          <td>${escapeHtml(r.city || '-')}</td>
+          <td class="col-nowrap">${escapeHtml(r.city || '-')}</td>
           <td>${r.applicationDate || '-'}</td>
-          <td>
+          <td class="col-nowrap">
             <span class="stage-tag stage-${r.stage}">${r.stage}</span>
           </td>
           <td>
             <div>${escapeHtml(r.recentSchedule || '-')}</div>
             ${r.nextAction ? `<div style="font-size:11px;color:var(--muted)">👉 ${escapeHtml(r.nextAction)}</div>` : ''}
           </td>
-          <td class="text-right">
+          <td class="text-right col-nowrap">
             <div class="table-actions">
               <button class="btn-sm btn-advance" data-id="${r.id}" title="推进到下一阶段">推进</button>
               <button class="btn-sm btn-edit" data-id="${r.id}">编辑</button>
@@ -496,25 +563,63 @@
   });
 
   // ================= TAB 2: 简历资料库管理核心逻辑 =================
+  const KV_SECTIONS = ['基本信息', '其他信息', '技能证书'];
+
+  function migrateKvToArray(resume) {
+    if (!resume || typeof resume !== 'object') return resume;
+    let migrated = false;
+    KV_SECTIONS.forEach(sec => {
+      if (resume[sec] && !Array.isArray(resume[sec]) && typeof resume[sec] === 'object') {
+        resume[sec] = Object.entries(resume[sec]).map(([k, v]) => [k, v]);
+        migrated = true;
+      }
+    });
+    return migrated;
+  }
+
   async function loadResume() {
+    console.log('[loadResume] 开始加载简历数据...');
     const saved = await storageGet(RESUME_STORAGE_KEY);
     if (saved && typeof saved === 'object') {
       currentResume = saved;
+      console.log('[loadResume] 加载成功，模块顺序:', Object.keys(currentResume).join(' → '));
+      if (migrateKvToArray(currentResume)) {
+        await storageSet(RESUME_STORAGE_KEY, currentResume);
+      }
     } else {
       currentResume = DEFAULT_RESUME;
+      console.log('[loadResume] 无保存数据，使用默认简历');
       await storageSet(RESUME_STORAGE_KEY, currentResume);
     }
+
+    if (currentResume._sectionOrder && Array.isArray(currentResume._sectionOrder)) {
+      resumeSectionOrder = currentResume._sectionOrder;
+      console.log('[loadResume] 从数据中加载 _sectionOrder:', resumeSectionOrder.join(' → '));
+    } else {
+      resumeSectionOrder = Object.keys(currentResume).filter(k => k !== '_sectionOrder');
+      console.log('[loadResume] 无 _sectionOrder，按对象键顺序');
+    }
+
     renderResumeEditor();
+    console.log('[loadResume] 渲染完成，当前 DOM 模块顺序:',
+      Array.from($$('.resume-editor-grid .editor-card')).map(c => c.id).join(' → '));
+  }
+
+  function kvEntries(data) {
+    if (Array.isArray(data)) return data;
+    if (data && typeof data === 'object') return Object.entries(data);
+    return [];
   }
 
   function renderResumeEditor() {
-    // 渲染 KV 区域：优先信息、基本信息、竞赛与技能
-    ['优先信息', '基本信息', '竞赛与技能'].forEach(sec => {
+    // 渲染 KV 区域
+    KV_SECTIONS.forEach(sec => {
       const container = $(`#kv-${sec}`);
       if (!container) return;
-      const data = currentResume[sec] || {};
-      container.innerHTML = Object.entries(data).map(([k, v]) => `
+      const entries = kvEntries(currentResume[sec]);
+      container.innerHTML = entries.map(([k, v]) => `
         <div class="kv-row" data-section="${sec}">
+          <span class="drag-handle" title="拖动排序" draggable="true"></span>
           <input type="text" class="kv-key" value="${escapeHtml(k)}" placeholder="字段名称">
           <input type="text" class="kv-val" value="${escapeHtml(v)}" placeholder="内容值">
           <button type="button" class="kv-del-btn" data-action="del-kv" title="删除字段">✕</button>
@@ -522,14 +627,15 @@
       `).join('');
     });
 
-    // 渲染经历列表：教育经历、实习经历、项目经历
-    ['教育经历', '实习经历', '项目经历'].forEach(sec => {
+    // 渲染经历列表
+    ['教育经历', '实习经历', '校园经历', '项目经历', '奖励荣誉', '家庭成员'].forEach(sec => {
       const container = $(`#exp-${sec}`);
       if (!container) return;
       const list = Array.isArray(currentResume[sec]) ? currentResume[sec] : [];
       container.innerHTML = list.map((item, idx) => `
         <div class="exp-item-card" data-section="${sec}" data-index="${idx}">
           <div class="exp-item-header">
+            <span class="drag-handle" title="拖动排序" draggable="true"></span>
             <h4>#${idx + 1} ${escapeHtml(item._rowName || '经历')}</h4>
             <div>
               <button type="button" class="btn-sm btn-danger" data-action="del-exp">删除此条</button>
@@ -537,16 +643,16 @@
           </div>
           <div class="exp-fields-grid">
             <div class="form-item">
-              <label>经历标签 (_rowName)</label>
+              <label>经历标签</label>
               <input type="text" class="exp-field" data-key="_rowName" value="${escapeHtml(item._rowName || '')}" placeholder="例如：硕士 / 腾讯">
             </div>
             ${Object.entries(item).filter(([k]) => k !== '_rowName').map(([k, v]) => {
-              const isLongText = ['主要工作', '岗位职责', '自我评价', '项目职责'].includes(k);
+              const isLongText = ['主要工作', '岗位职责', '实习收获', '自我评价', '项目职责', '说明'].includes(k);
               return `
                 <div class="form-item ${isLongText ? 'full-w' : ''}">
                   <label>${escapeHtml(k)}</label>
                   ${isLongText 
-                    ? `<textarea class="exp-field" data-key="${escapeHtml(k)}" rows="3">${escapeHtml(v)}</textarea>`
+                    ? `<textarea class="exp-field" data-key="${escapeHtml(k)}" rows="4">${escapeHtml(v)}</textarea>`
                     : `<input type="text" class="exp-field" data-key="${escapeHtml(k)}" value="${escapeHtml(v)}">`
                   }
                 </div>
@@ -556,6 +662,28 @@
         </div>
       `).join('');
     });
+
+    // 按 currentResume 的键顺序重排 DOM 中的模块卡片
+    const grid = $('.resume-editor-grid');
+    if (!grid) return;
+    const cardMap = {};
+    grid.querySelectorAll('.editor-card').forEach(card => {
+      const kv = card.querySelector('[id^="kv-"]');
+      const exp = card.querySelector('[id^="exp-"]');
+      if (kv) cardMap[kv.id.replace('kv-', '')] = card;
+      if (exp) cardMap[exp.id.replace('exp-', '')] = card;
+    });
+    console.log('[renderResumeEditor] 按 resumeSectionOrder 重排模块, 目标顺序:', resumeSectionOrder.join(' → '));
+    resumeSectionOrder.forEach(sec => {
+      const card = cardMap[sec];
+      if (card) {
+        grid.appendChild(card);
+      } else {
+        console.warn('[renderResumeEditor] 未找到模块卡片:', sec);
+      }
+    });
+    console.log('[renderResumeEditor] 重排后 DOM 顺序:',
+      Array.from(grid.querySelectorAll('.editor-card')).map(c => c.id).join(' → '));
   }
 
   // 添加 KV 字段函数
@@ -566,6 +694,7 @@
     row.className = 'kv-row';
     row.setAttribute('data-section', sec);
     row.innerHTML = `
+      <span class="drag-handle" title="拖动排序" draggable="true"></span>
       <input type="text" class="kv-key" placeholder="新字段名称">
       <input type="text" class="kv-val" placeholder="内容值">
       <button type="button" class="kv-del-btn" data-action="del-kv" title="删除字段">✕</button>
@@ -602,7 +731,19 @@
         { k: '岗位', label: '岗位名称', val: '' },
         { k: '开始', label: '开始时间', val: '2025-06' },
         { k: '结束', label: '结束时间', val: '至今' },
-        { k: '岗位职责', label: '岗位职责 (长文本)', val: '', isTextarea: true }
+        { k: '证明人', label: '证明人', val: '' },
+        { k: '证明人电话', label: '证明人电话', val: '' },
+        { k: '岗位职责', label: '岗位职责 (长文本)', val: '', isTextarea: true },
+        { k: '实习收获', label: '实习收获 (长文本)', val: '', isTextarea: true }
+      ];
+    } else if (sec === '校园经历') {
+      defaultFields = [
+        { k: '_rowName', label: '经历标签', val: '校园经历简称' },
+        { k: '组织', label: '组织/社团全称', val: '' },
+        { k: '职务', label: '担任职务', val: '部长/主席/干事' },
+        { k: '开始', label: '开始时间', val: '2024-09' },
+        { k: '结束', label: '结束时间', val: '2025-06' },
+        { k: '主要工作', label: '主要工作 (长文本)', val: '', isTextarea: true }
       ];
     } else if (sec === '项目经历') {
       defaultFields = [
@@ -613,12 +754,30 @@
         { k: '结束', label: '结束时间', val: '至今' },
         { k: '主要工作', label: '主要工作 (长文本)', val: '', isTextarea: true }
       ];
+    } else if (sec === '奖励荣誉') {
+      defaultFields = [
+        { k: '_rowName', label: '荣誉标签', val: '荣誉简称' },
+        { k: '获奖年月', label: '获奖年月', val: '2024-10' },
+        { k: '荣誉名称', label: '荣誉名称', val: '' },
+        { k: '奖励级别', label: '奖励级别', val: '国家级/省部级/校级/院级' },
+        { k: '说明', label: '说明', val: '', isTextarea: true }
+      ];
+    } else if (sec === '家庭成员') {
+      defaultFields = [
+        { k: '_rowName', label: '成员标签', val: '父亲/母亲/配偶' },
+        { k: '姓名', label: '姓名', val: '' },
+        { k: '与本人关系', label: '与本人关系', val: '父子/母子/配偶' },
+        { k: '出生年月', label: '出生年月', val: '1972-03' },
+        { k: '工作单位', label: '工作单位', val: '' },
+        { k: '职务', label: '职务', val: '' }
+      ];
     }
 
     const currentCount = container.querySelectorAll('.exp-item-card').length + 1;
 
     card.innerHTML = `
       <div class="exp-item-header">
+        <span class="drag-handle" title="拖动排序" draggable="true"></span>
         <h4>#${currentCount} 新增经历</h4>
         <button type="button" class="btn-sm btn-danger" data-action="del-exp">删除此条</button>
       </div>
@@ -627,7 +786,7 @@
           <div class="form-item ${f.isTextarea ? 'full-w' : ''}">
             <label>${f.label}</label>
             ${f.isTextarea
-              ? `<textarea class="exp-field" data-key="${f.k}" rows="3" placeholder="详细描述..."></textarea>`
+              ? `<textarea class="exp-field" data-key="${f.k}" rows="4" placeholder="详细描述..."></textarea>`
               : `<input type="text" class="exp-field" data-key="${f.k}" value="${f.val}" placeholder="填写内容...">`
             }
           </div>
@@ -684,45 +843,300 @@
     }
   });
 
-  // 从 DOM 收集并保存简历数据
+  // ================= 拖拽排序系统 =================
+  (function initDragAndDrop() {
+    let dragSrcElement = null;
+    const emptyImg = new Image();
+    emptyImg.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+
+    function getDropTarget(el) {
+      if (!dragSrcElement) return null;
+      if (dragSrcElement.classList.contains('kv-row')) {
+        return el.closest('.kv-row') || null;
+      }
+      if (dragSrcElement.classList.contains('exp-item-card')) {
+        return el.closest('.exp-item-card') || null;
+      }
+      return el.closest('.editor-card') || null;
+    }
+
+    // 当拖拽模块卡片时，鼠标可能落在 Grid gap 间隙上，此时 e.target 是 grid 容器而非卡片
+    // 此函数根据鼠标 Y 坐标在 grid 内查找最近的 .editor-card
+    function findNearestCardInGrid(clientY) {
+      const grid = $('.resume-editor-grid');
+      if (!grid) return null;
+      const cards = grid.querySelectorAll('.editor-card');
+      let nearest = null;
+      let minDist = Infinity;
+      cards.forEach(card => {
+        if (card === dragSrcElement) return;
+        const rect = card.getBoundingClientRect();
+        const centerY = rect.top + rect.height / 2;
+        const dist = Math.abs(clientY - centerY);
+        if (dist < minDist) {
+          minDist = dist;
+          nearest = card;
+        }
+      });
+      return nearest;
+    }
+
+    function updateExpCardNumbers(container) {
+      if (!container) return;
+      container.querySelectorAll('.exp-item-card').forEach((c, idx) => {
+        const h4 = c.querySelector('.exp-item-header h4');
+        const tagEl = c.querySelector('.exp-field[data-key="_rowName"]');
+        const tag = tagEl ? tagEl.value : '经历';
+        if (h4) h4.textContent = `#${idx + 1} ${tag}`;
+      });
+    }
+
+    function insertRelative(dragEl, targetEl, clientY) {
+      const parent = targetEl.parentElement;
+      if (!parent) return;
+      const rect = targetEl.getBoundingClientRect();
+      const midY = rect.top + rect.height / 2;
+      if (clientY < midY) {
+        parent.insertBefore(dragEl, targetEl);
+      } else {
+        parent.insertBefore(dragEl, targetEl.nextSibling);
+      }
+    }
+
+    function cleanupDragging() {
+      if (dragSrcElement) {
+        dragSrcElement.classList.remove('dragging');
+      }
+      document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+    }
+
+    document.addEventListener('dragstart', (e) => {
+      const handle = e.target.closest('.drag-handle');
+      if (!handle) { e.preventDefault(); return; }
+
+      const kvRow = handle.closest('.kv-row');
+      const expCard = handle.closest('.exp-item-card');
+      const card = handle.closest('.editor-card');
+
+      if (kvRow) {
+        dragSrcElement = kvRow;
+        kvRow.classList.add('dragging');
+        console.log('[dragstart] 开始拖拽 kv-row, section:', kvRow.getAttribute('data-section'));
+      } else if (expCard) {
+        dragSrcElement = expCard;
+        expCard.classList.add('dragging');
+        console.log('[dragstart] 开始拖拽 exp-item-card, section:', expCard.getAttribute('data-section'));
+      } else if (card) {
+        dragSrcElement = card;
+        card.classList.add('dragging');
+        console.log('[dragstart] 开始拖拽编辑器模块:', card.id || 'unknown');
+      } else {
+        e.preventDefault();
+        return;
+      }
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setDragImage(emptyImg, 0, 0);
+    });
+
+    document.addEventListener('dragend', () => {
+      console.log('[dragend] 拖拽结束');
+      // 不在这里清空 dragSrcElement，让 drop 事件先处理
+      // 使用 setTimeout 确保 drop 事件先执行
+      setTimeout(() => {
+        cleanupDragging();
+        dragSrcElement = null;
+      }, 0);
+    });
+
+    document.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      if (!dragSrcElement) return;
+      e.dataTransfer.dropEffect = 'move';
+
+      var target = getDropTarget(e.target);
+      // 模块拖拽：如果鼠标落在 Grid gap 上，根据坐标找最近的卡片
+      if (!target && dragSrcElement.classList.contains('editor-card')) {
+        target = findNearestCardInGrid(e.clientY);
+      }
+      if (!target || target === dragSrcElement) return;
+
+      document.querySelectorAll('.drag-over').forEach(el => {
+        if (el !== target) el.classList.remove('drag-over');
+      });
+
+      if (dragSrcElement.classList.contains('editor-card') && target.classList.contains('editor-card')) {
+        target.classList.add('drag-over');
+      } else if (dragSrcElement.classList.contains('kv-row') && target.classList.contains('kv-row') &&
+                 dragSrcElement.getAttribute('data-section') === target.getAttribute('data-section')) {
+        target.classList.add('drag-over');
+      } else if (dragSrcElement.classList.contains('exp-item-card') && target.classList.contains('exp-item-card') &&
+                 dragSrcElement.getAttribute('data-section') === target.getAttribute('data-section')) {
+        target.classList.add('drag-over');
+      }
+    });
+
+    document.addEventListener('dragleave', (e) => {
+      const target = getDropTarget(e.target);
+      if (target && !target.contains(e.relatedTarget)) {
+        target.classList.remove('drag-over');
+      }
+    });
+
+    document.addEventListener('drop', (e) => {
+      e.preventDefault();
+      console.log('[drop] 事件触发, e.target:', e.target.tagName, e.target.className, 'e.clientY:', e.clientY);
+
+      if (!dragSrcElement) {
+        console.warn('[drop] dragSrcElement 为 null，跳过');
+        return;
+      }
+      console.log('[drop] dragSrcElement:', dragSrcElement.tagName, dragSrcElement.className, dragSrcElement.id || '');
+
+      var target = getDropTarget(e.target);
+      console.log('[drop] getDropTarget 返回:', target ? (target.tagName + ' ' + target.className + ' ' + (target.id || '')) : 'null');
+
+      // 模块拖拽：如果鼠标落在 Grid gap 上，根据坐标找最近的卡片
+      if (!target && dragSrcElement.classList.contains('editor-card')) {
+        target = findNearestCardInGrid(e.clientY);
+        console.log('[drop] findNearestCardInGrid 返回:', target ? (target.id || 'unknown') : 'null');
+      }
+      if (!target || target === dragSrcElement) {
+        console.warn('[drop] 目标无效或与源相同，跳过移动。target:', target === dragSrcElement ? '=== dragSrcElement' : 'null');
+        cleanupDragging();
+        dragSrcElement = null;
+        return;
+      }
+
+      let moved = false;
+      if (dragSrcElement.classList.contains('editor-card') && target.classList.contains('editor-card')) {
+        if (target.parentElement === dragSrcElement.parentElement) {
+          insertRelative(dragSrcElement, target, e.clientY);
+          moved = true;
+          console.log('[drop] 模块移动成功, 源:', dragSrcElement.id, '目标:', target.id);
+        } else {
+          console.warn('[drop] 模块父容器不同，跳过');
+        }
+      } else if (dragSrcElement.classList.contains('kv-row') && target.classList.contains('kv-row') &&
+                 dragSrcElement.getAttribute('data-section') === target.getAttribute('data-section')) {
+        insertRelative(dragSrcElement, target, e.clientY);
+        moved = true;
+        console.log('[drop] KV行移动成功');
+      } else if (dragSrcElement.classList.contains('exp-item-card') && target.classList.contains('exp-item-card') &&
+                 dragSrcElement.getAttribute('data-section') === target.getAttribute('data-section')) {
+        insertRelative(dragSrcElement, target, e.clientY);
+        updateExpCardNumbers(dragSrcElement.parentElement);
+        moved = true;
+        console.log('[drop] 经历卡片移动成功');
+      } else {
+        console.warn('[drop] 拖拽类型不匹配，跳过');
+      }
+
+      cleanupDragging();
+      dragSrcElement = null;
+
+      if (moved) {
+        console.log('[drop] 开始保存...');
+        // 使用 setTimeout 确保 DOM 已完全更新
+        setTimeout(async () => {
+          try {
+            await collectAndSaveResume();
+            console.log('[drop] 拖拽排序保存成功');
+          } catch (err) {
+            console.error('[drop] 拖拽排序保存失败', err);
+            showToast('拖拽排序保存失败，请手动点击保存按钮');
+          }
+        }, 50);
+      } else {
+        console.warn('[drop] moved=false，未触发保存');
+      }
+    });
+  })();
+
+  function updateSaveStatus() {
+    const indicator = $('#saveStatusIndicator');
+    if (!indicator) return;
+    const ts = localStorage.getItem('__last_save_time');
+    if (ts) {
+      const d = new Date(parseInt(ts));
+      indicator.textContent = `上次保存: ${d.toLocaleTimeString()}`;
+      indicator.style.color = 'var(--green)';
+    } else {
+      indicator.textContent = '尚未保存';
+      indicator.style.color = 'var(--red)';
+    }
+  }
+
+  // 从 DOM 收集并保存简历数据（按模块 DOM 顺序）
   async function collectAndSaveResume() {
     const updated = {};
 
-    // 收集 KV
-    ['优先信息', '基本信息', '竞赛与技能'].forEach(sec => {
-      updated[sec] = {};
-      const rows = $$(`#kv-${sec} .kv-row`);
-      rows.forEach(r => {
-        const k = r.querySelector('.kv-key').value.trim();
-        const v = r.querySelector('.kv-val').value.trim();
-        if (k) updated[sec][k] = v;
-      });
-    });
+    const cards = $$('.resume-editor-grid .editor-card');
+    console.log('[collectAndSaveResume] 收集 DOM 顺序模块:',
+      Array.from(cards).map(c => c.id).join(' → '));
 
-    // 收集经历
-    ['教育经历', '实习经历', '项目经历'].forEach(sec => {
-      updated[sec] = [];
-      const cards = $$(`#exp-${sec} .exp-item-card`);
-      cards.forEach(card => {
-        const item = {};
-        const fields = card.querySelectorAll('.exp-field');
-        fields.forEach(f => {
-          const k = f.getAttribute('data-key');
-          if (k) item[k] = f.value.trim();
+    cards.forEach(card => {
+      const kv = card.querySelector('[id^="kv-"]');
+      const exp = card.querySelector('[id^="exp-"]');
+
+      if (kv) {
+        const sec = kv.id.replace('kv-', '');
+        updated[sec] = [];
+        const rows = kv.querySelectorAll('.kv-row');
+        rows.forEach(r => {
+          const k = r.querySelector('.kv-key').value.trim();
+          const v = r.querySelector('.kv-val').value.trim();
+          if (k) updated[sec].push([k, v]);
         });
-        if (Object.keys(item).length > 0) {
-          updated[sec].push(item);
-        }
-      });
+      } else if (exp) {
+        const sec = exp.id.replace('exp-', '');
+        updated[sec] = [];
+        const expCards = exp.querySelectorAll('.exp-item-card');
+        expCards.forEach(ec => {
+          const item = {};
+          const fields = ec.querySelectorAll('.exp-field');
+          fields.forEach(f => {
+            const k = f.getAttribute('data-key');
+            if (k) item[k] = f.value.trim();
+          });
+          if (Object.keys(item).length > 0) {
+            updated[sec].push(item);
+          }
+        });
+      }
     });
 
+    console.log('[collectAndSaveResume] 收集到的模块顺序:', Object.keys(updated).join(' → '));
+
+    updated._sectionOrder = Object.keys(updated);
     currentResume = updated;
+    resumeSectionOrder = updated._sectionOrder;
     await storageSet(RESUME_STORAGE_KEY, currentResume);
+    console.log('[collectAndSaveResume] 已保存（含 _sectionOrder）:', resumeSectionOrder.join(' → '));
+    localStorage.setItem('__last_save_time', Date.now());
+    localStorage.setItem('__last_save_order', JSON.stringify(
+      (currentResume['其他信息'] || []).map(e => (Array.isArray(e) ? e[0] : e))
+    ));
     saveSnapshot(records, currentResume);
+    updateSaveStatus();
     showToast('🎉 简历资料库已保存！所有网页侧边栏已实时同步');
   }
 
-  $('#saveAllResumeBtn').addEventListener('click', collectAndSaveResume);
+  $('#saveAllResumeBtn').addEventListener('click', async () => {
+    const btn = $('#saveAllResumeBtn');
+    const origText = btn.textContent;
+    btn.textContent = '⏳ 保存中...';
+    btn.disabled = true;
+    try {
+      await collectAndSaveResume();
+      btn.textContent = '✓ 已保存';
+      setTimeout(() => { btn.textContent = origText; btn.disabled = false; }, 1500);
+    } catch (err) {
+      console.error('保存失败', err);
+      btn.textContent = origText;
+      btn.disabled = false;
+      showToast('保存失败，请刷新页面后重试');
+    }
+  });
 
   // 导出简历 JSON
   $('#resumeExportJsonBtn').addEventListener('click', () => {
@@ -763,6 +1177,7 @@
   $('#resumeResetSeedBtn').addEventListener('click', async () => {
     if (confirm('确定要重置简历为默认示例数据吗？')) {
       currentResume = DEFAULT_RESUME;
+      resumeSectionOrder = DEFAULT_RESUME._sectionOrder || Object.keys(DEFAULT_RESUME).filter(k => !k.startsWith('_'));
       await storageSet(RESUME_STORAGE_KEY, currentResume);
       renderResumeEditor();
       showToast('已重置为示例简历');
@@ -792,6 +1207,42 @@
   $('#exportDataBtn').addEventListener('click', downloadFullBackup);
   $('#exportFullBackupBtn').addEventListener('click', downloadFullBackup);
 
+  // 投递追踪导入备份
+  $('#importRecordsBtn').addEventListener('click', () => $('#recordsFileInput').click());
+  $('#recordsFileInput').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = async (evt) => {
+      try {
+        const parsed = JSON.parse(evt.target.result);
+        let importedRecords = [];
+
+        if (Array.isArray(parsed)) {
+          importedRecords = parsed;
+        } else if (parsed && Array.isArray(parsed.records)) {
+          importedRecords = parsed.records;
+        }
+
+        if (importedRecords.length === 0) {
+          alert('导入失败：文件中未找到投递记录');
+          return;
+        }
+
+        records = importedRecords;
+        await storageSet(RECORDS_STORAGE_KEY, records);
+        saveSnapshot(records, currentResume);
+        renderRecords();
+        showToast(`✅ 成功导入 ${importedRecords.length} 条投递记录！`);
+      } catch (err) {
+        alert('导入失败：文件损坏或格式不兼容');
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = '';
+  });
+
+  // 数据安全备份导入
   $('#importFullBackupBtn').addEventListener('click', () => $('#fullBackupFileInput').click());
   $('#fullBackupFileInput').addEventListener('change', (e) => {
     const file = e.target.files[0];
@@ -817,6 +1268,8 @@
         }
         if (importedResume) {
           currentResume = importedResume;
+          currentResume._sectionOrder = Object.keys(importedResume).filter(k => k !== '_sectionOrder');
+          resumeSectionOrder = currentResume._sectionOrder;
           await storageSet(RESUME_STORAGE_KEY, currentResume);
         }
 
@@ -832,10 +1285,22 @@
     e.target.value = '';
   });
 
-  // 恢复上一快照
-  $('#restoreLastSnapshotBtn').addEventListener('click', async () => {
+  // 打开历史快照列表
+  $('#openSnapshotListBtn').addEventListener('click', async () => {
+    const modal = $('#snapshotListModal');
+    const body = $('#snapshotListBody');
+    body.innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px;">正在加载快照列表...</p>';
+    modal.showModal();
+
     try {
       const db = await openSafetyDb();
+      const allSnapshots = await new Promise((resolve, reject) => {
+        const tx = db.transaction('snapshots', 'readonly');
+        const req = tx.objectStore('snapshots').getAll();
+        req.onsuccess = () => resolve(req.result || []);
+        req.onerror = () => reject(req.error);
+      });
+
       const keys = await new Promise((resolve, reject) => {
         const tx = db.transaction('snapshots', 'readonly');
         const req = tx.objectStore('snapshots').getAllKeys();
@@ -843,30 +1308,85 @@
         req.onerror = () => reject(req.error);
       });
 
-      if (keys.length < 2) {
-        alert('暂无更早的历史快照可供恢复');
+      if (allSnapshots.length === 0) {
+        body.innerHTML = '<div class="snapshot-empty">暂无历史快照</div>';
         return;
       }
 
-      const prevKey = keys.sort()[keys.length - 2];
-      const snapshot = await new Promise((resolve, reject) => {
-        const tx = db.transaction('snapshots', 'readonly');
-        const req = tx.objectStore('snapshots').get(prevKey);
-        req.onsuccess = () => resolve(req.result);
+      const pairs = keys.map((k, i) => ({ key: k, snapshot: allSnapshots[i] }));
+      pairs.sort((a, b) => (b.snapshot.savedAt || '').localeCompare(a.snapshot.savedAt || ''));
+
+      body.innerHTML = pairs.map(({ key, snapshot }) => {
+        const time = snapshot.savedAt ? new Date(snapshot.savedAt).toLocaleString('zh-CN') : '未知时间';
+        const recordCount = Array.isArray(snapshot.records) ? snapshot.records.length : 0;
+        const resumeModuleCount = snapshot.resume && typeof snapshot.resume === 'object'
+          ? Object.keys(snapshot.resume).filter(k => !k.startsWith('_')).length : 0;
+        return `
+          <div class="snapshot-item" data-key="${escapeHtml(key)}">
+            <div class="snapshot-info">
+              <div class="snapshot-time">${escapeHtml(time)}</div>
+              <div class="snapshot-meta">${recordCount} 条投递记录 · ${resumeModuleCount} 个简历模块</div>
+            </div>
+            <button class="snapshot-restore-btn" data-key="${escapeHtml(key)}">恢复此版本</button>
+          </div>
+        `;
+      }).join('');
+
+      body.querySelectorAll('.snapshot-restore-btn').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+          e.stopPropagation();
+          const targetKey = btn.dataset.key;
+          if (!confirm('确定要恢复到此快照版本吗？当前数据将被覆盖，建议先导出备份。')) return;
+
+          try {
+            const snapshot = await new Promise((resolve, reject) => {
+              const tx = db.transaction('snapshots', 'readonly');
+              const req = tx.objectStore('snapshots').get(targetKey);
+              req.onsuccess = () => resolve(req.result);
+              req.onerror = () => reject(req.error);
+            });
+
+            if (snapshot && Array.isArray(snapshot.records)) {
+              records = snapshot.records;
+              if (snapshot.resume) {
+                currentResume = snapshot.resume;
+                currentResume._sectionOrder = Object.keys(snapshot.resume).filter(k => k !== '_sectionOrder');
+                resumeSectionOrder = currentResume._sectionOrder;
+              }
+              await storageSet(RECORDS_STORAGE_KEY, records);
+              await storageSet(RESUME_STORAGE_KEY, currentResume);
+              renderRecords();
+              renderResumeEditor();
+              modal.close();
+              showToast(`✅ 已成功恢复至快照版本 (${snapshot.savedAt.slice(0, 16)})`);
+            }
+          } catch (err) {
+            alert('恢复失败：' + (err.message || '未知错误'));
+          }
+        });
+      });
+    } catch (e) {
+      body.innerHTML = `<div class="snapshot-empty">加载失败：${e.message || '未知错误'}</div>`;
+    }
+  });
+
+  $('#closeSnapshotListBtn').addEventListener('click', () => $('#snapshotListModal').close());
+
+  // 清空历史快照
+  $('#clearSnapshotsBtn').addEventListener('click', async () => {
+    if (!confirm('确定要清空所有历史版本快照吗？此操作不可逆！')) return;
+    try {
+      const db = await openSafetyDb();
+      await new Promise((resolve, reject) => {
+        const tx = db.transaction('snapshots', 'readwrite');
+        const req = tx.objectStore('snapshots').clear();
+        req.onsuccess = () => resolve();
         req.onerror = () => reject(req.error);
       });
-
-      if (snapshot && Array.isArray(snapshot.records)) {
-        records = snapshot.records;
-        if (snapshot.resume) currentResume = snapshot.resume;
-        await storageSet(RECORDS_STORAGE_KEY, records);
-        await storageSet(RESUME_STORAGE_KEY, currentResume);
-        renderRecords();
-        renderResumeEditor();
-        showToast(`已成功回滚至快照版本 (${snapshot.savedAt.slice(0, 16)})`);
-      }
+      updateSnapshotCount();
+      showToast('已清空所有历史快照');
     } catch (e) {
-      alert('快照恢复失败');
+      alert('清空快照失败：' + (e.message || '未知错误'));
     }
   });
 
@@ -1166,6 +1686,7 @@
     await loadRecords();
     await loadResume();
     updateSnapshotCount();
+    updateSaveStatus();
   }
 
   init();

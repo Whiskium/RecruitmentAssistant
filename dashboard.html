@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
-  <title>秋招求职与简历中枢看板</title>
+  <title>校园招聘助手系统</title>
   <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
@@ -14,7 +14,7 @@
       <div class="sidebar-brand">
         <div class="brand-mark">🚀</div>
         <div>
-          <div class="sidebar-title">秋招中枢看板</div>
+          <div class="sidebar-title">校园招聘助手系统</div>
           <div class="sidebar-subtitle">求职提效一体化系统 v2.0</div>
         </div>
       </div>
@@ -22,11 +22,11 @@
       <nav class="sidebar-nav">
         <button class="nav-item is-active" id="nav-records" data-tab="records-tab">
           <span class="nav-icon">📊</span>
-          <span>投递追踪看板</span>
+          <span>投递追踪</span>
         </button>
         <button class="nav-item" id="nav-resume" data-tab="resume-tab">
           <span class="nav-icon">📝</span>
-          <span>我的简历资料库</span>
+          <span>我的简历</span>
         </button>
         <button class="nav-item" id="nav-safety" data-tab="safety-tab">
           <span class="nav-icon">⚙️</span>
@@ -36,7 +36,7 @@
 
       <div class="sidebar-footer">
         <strong>💡 提示</strong>
-        <p>在任意招聘网站按 <code>Ctrl+Shift+F</code> 可随时唤起侧边栏辅助填报与一键收录。</p>
+        <p>在任意招聘网站按 <code id="shortcutDisplay">Command+Shift+F</code> 可随时唤起侧边栏辅助填报与一键收录。</p>
       </div>
     </aside>
 
@@ -46,19 +46,20 @@
       <header class="topbar">
         <div class="brand">
           <div>
-            <div class="page-kicker" id="tabKicker">JOB TRACKING DASHBOARD</div>
-            <h1 id="tabTitle">投递追踪看板</h1>
+            <div class="page-kicker" id="tabKicker">JOB TRACKING</div>
+            <h1 id="tabTitle">投递追踪</h1>
             <p class="subtitle" id="tabSubtitle">全面监控网申进度、面试安排与全链路阶段流转</p>
           </div>
         </div>
         <div class="top-actions" id="topActionsContainer">
           <button class="btn" id="openOcrModalBtn"><span class="icon">🖼️</span>截图识别</button>
           <button class="btn" id="exportDataBtn"><span class="icon">📤</span>导出备份</button>
+          <button class="btn" id="importRecordsBtn"><span class="icon">📥</span>导入备份</button>
           <button class="btn btn-primary" id="addRecordBtn"><span class="icon">+</span>新增投递</button>
         </div>
       </header>
 
-      <!-- ================= TAB 1: 投递追踪看板 ================= -->
+      <!-- ================= TAB 1: 投递追踪 ================= -->
       <section class="tab-content is-active" id="records-tab">
         <!-- 统计指标卡片 -->
         <div class="stats">
@@ -167,7 +168,7 @@
         </div>
       </section>
 
-      <!-- ================= TAB 2: 我的简历资料库 ================= -->
+      <!-- ================= TAB 2: 我的简历 ================= -->
       <section class="tab-content" id="resume-tab">
         <div class="resume-toolbar">
           <div class="resume-toolbar-left">
@@ -178,32 +179,36 @@
             <button class="btn" id="resumeImportJsonBtn">导入简历 JSON</button>
             <button class="btn" id="resumeResetSeedBtn">重置为示例</button>
             <button class="btn btn-primary" id="saveAllResumeBtn">💾 保存并实时同步</button>
+            <span id="saveStatusIndicator" style="font-size:12px;color:var(--muted);margin-left:6px;white-space:nowrap;"></span>
             <input type="file" id="resumeFileInput" accept=".json,application/json" hidden>
           </div>
         </div>
 
         <div class="resume-editor-grid">
-          <!-- 优先信息 -->
-          <div class="editor-card" id="card-priority">
-            <div class="editor-card-head">
-              <h3>⭐ 优先信息 (常用高频字段)</h3>
-              <button type="button" class="btn-sm" data-action="add-kv" data-section="优先信息">+ 添加字段</button>
-            </div>
-            <div class="kv-container" id="kv-优先信息"></div>
-          </div>
-
           <!-- 基本信息 -->
           <div class="editor-card" id="card-basic">
             <div class="editor-card-head">
+              <span class="drag-handle" title="拖动排序" draggable="true"></span>
               <h3>👤 基本信息</h3>
               <button type="button" class="btn-sm" data-action="add-kv" data-section="基本信息">+ 添加字段</button>
             </div>
             <div class="kv-container" id="kv-基本信息"></div>
           </div>
 
+          <!-- 其他信息 -->
+          <div class="editor-card" id="card-priority">
+            <div class="editor-card-head">
+              <span class="drag-handle" title="拖动排序" draggable="true"></span>
+              <h3>📋 其他信息</h3>
+              <button type="button" class="btn-sm" data-action="add-kv" data-section="其他信息">+ 添加字段</button>
+            </div>
+            <div class="kv-container" id="kv-其他信息"></div>
+          </div>
+
           <!-- 教育经历 -->
           <div class="editor-card full-col" id="card-edu">
             <div class="editor-card-head">
+              <span class="drag-handle" title="拖动排序" draggable="true"></span>
               <h3>🎓 教育经历</h3>
               <button type="button" class="btn-sm" data-action="add-exp" data-section="教育经历">+ 添加教育经历</button>
             </div>
@@ -213,28 +218,61 @@
           <!-- 实习经历 -->
           <div class="editor-card full-col" id="card-intern">
             <div class="editor-card-head">
+              <span class="drag-handle" title="拖动排序" draggable="true"></span>
               <h3>💼 实习经历</h3>
               <button type="button" class="btn-sm" data-action="add-exp" data-section="实习经历">+ 添加实习经历</button>
             </div>
             <div class="exp-container" id="exp-实习经历"></div>
           </div>
 
+          <!-- 校园经历 -->
+          <div class="editor-card full-col" id="card-campus">
+            <div class="editor-card-head">
+              <span class="drag-handle" title="拖动排序" draggable="true"></span>
+              <h3>🏫 校园经历</h3>
+              <button type="button" class="btn-sm" data-action="add-exp" data-section="校园经历">+ 添加校园经历</button>
+            </div>
+            <div class="exp-container" id="exp-校园经历"></div>
+          </div>
+
           <!-- 项目经历 -->
           <div class="editor-card full-col" id="card-project">
             <div class="editor-card-head">
+              <span class="drag-handle" title="拖动排序" draggable="true"></span>
               <h3>🚀 项目经历</h3>
               <button type="button" class="btn-sm" data-action="add-exp" data-section="项目经历">+ 添加项目经历</button>
             </div>
             <div class="exp-container" id="exp-项目经历"></div>
           </div>
 
-          <!-- 竞赛与技能 -->
+          <!-- 奖励荣誉 -->
+          <div class="editor-card full-col" id="card-honor">
+            <div class="editor-card-head">
+              <span class="drag-handle" title="拖动排序" draggable="true"></span>
+              <h3>🏅 奖励荣誉</h3>
+              <button type="button" class="btn-sm" data-action="add-exp" data-section="奖励荣誉">+ 添加荣誉</button>
+            </div>
+            <div class="exp-container" id="exp-奖励荣誉"></div>
+          </div>
+
+          <!-- 家庭成员 -->
+          <div class="editor-card full-col" id="card-family">
+            <div class="editor-card-head">
+              <span class="drag-handle" title="拖动排序" draggable="true"></span>
+              <h3>👨‍👩‍👧‍👦 家庭成员</h3>
+              <button type="button" class="btn-sm" data-action="add-exp" data-section="家庭成员">+ 添加家庭成员</button>
+            </div>
+            <div class="exp-container" id="exp-家庭成员"></div>
+          </div>
+
+          <!-- 技能证书 -->
           <div class="editor-card full-col" id="card-skills">
             <div class="editor-card-head">
-              <h3>🏆 竞赛、论文与综合技能</h3>
-              <button type="button" class="btn-sm" data-action="add-kv" data-section="竞赛与技能">+ 添加字段</button>
+              <span class="drag-handle" title="拖动排序" draggable="true"></span>
+              <h3>📜 技能证书</h3>
+              <button type="button" class="btn-sm" data-action="add-kv" data-section="技能证书">+ 添加字段</button>
             </div>
-            <div class="kv-container" id="kv-竞赛与技能"></div>
+            <div class="kv-container" id="kv-技能证书"></div>
           </div>
         </div>
       </section>
@@ -263,9 +301,13 @@
             <div class="safety-btn-group">
               <button class="btn btn-primary" id="exportFullBackupBtn">📥 导出完整数据备份 (JSON)</button>
               <button class="btn" id="importFullBackupBtn">📤 导入备份文件 (兼容旧版)</button>
-              <button class="btn" id="restoreLastSnapshotBtn">⏪ 恢复上一历史快照</button>
-              <button class="btn btn-danger" id="clearAllDataBtn">⚠️ 清空所有数据</button>
+              <button class="btn" id="openSnapshotListBtn">📋 查看历史快照列表</button>
               <input type="file" id="fullBackupFileInput" accept=".json,application/json" hidden>
+              <input type="file" id="recordsFileInput" accept=".json,application/json" hidden>
+            </div>
+            <div class="safety-btn-group">
+              <button class="btn btn-danger" id="clearSnapshotsBtn">🗑️ 清空历史快照</button>
+              <button class="btn btn-danger" id="clearAllDataBtn">⚠️ 清空所有数据</button>
             </div>
           </div>
         </div>
@@ -393,12 +435,31 @@
     </div>
   </dialog>
 
+  <!-- ================= 模态弹窗: 历史快照列表 ================= -->
+  <dialog id="snapshotListModal" class="modal-dialog snapshot-modal">
+    <div class="modal-header">
+      <h2>📋 历史版本快照</h2>
+      <button class="modal-close-btn" id="closeSnapshotListBtn">✕</button>
+    </div>
+    <div class="modal-body snapshot-list-body" id="snapshotListBody">
+      <p style="color:var(--muted);text-align:center;padding:20px;">正在加载快照列表...</p>
+    </div>
+  </dialog>
+
   <!-- 全局 Toast 提示 -->
   <div class="toast" id="globalToast" role="status"></div>
 
   <!-- 离线 OCR 基础依赖优先加载 -->
   <script src="./ocr/tesseract.min.js"></script>
   <script src="./ocr/chi_sim-data.js"></script>
+  <script>
+    // 根据操作系统显示对应的快捷键
+    (function() {
+      const isMac = /Mac|iPhone|iPad|iPod/i.test(navigator.platform || navigator.userAgent);
+      const el = document.getElementById('shortcutDisplay');
+      if (el) el.textContent = (isMac ? 'Command' : 'Ctrl') + '+Shift+F';
+    })();
+  </script>
   <!-- 看板核心逻辑 -->
   <script src="dashboard.js"></script>
 </body>

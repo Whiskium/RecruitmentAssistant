@@ -1,5 +1,5 @@
 /**
- * 秋招求职与简历助手 - Content Script
+ * 校园招聘助手 - Content Script
  * 采用 Shadow DOM 隔离技术，保证与宿主网页样式 100% 零冲突
  */
 
@@ -9,28 +9,33 @@
   // 避免重复注入
   if (document.getElementById('autumn-job-assistant-host')) return;
 
+  // 检测操作系统，Mac 显示 Command，Windows 显示 Ctrl
+  const isMac = /Mac|iPhone|iPad|iPod/i.test(navigator.platform || navigator.userAgent);
+  const SHORTCUT_KEY = isMac ? 'Command' : 'Ctrl';
+  const SHORTCUT_DISPLAY = `${SHORTCUT_KEY}+Shift+F`;
+
   const RESUME_STORAGE_KEY = 'autumnRecruitmentTracker.resume.v1';
   const RECORDS_STORAGE_KEY = 'autumnRecruitmentTracker.records.v1';
 
   // ================= 默认简历备用种子数据 =================
   const DEFAULT_RESUME = {
-    "优先信息": {
-      "身份证": "110101199801011234",
-      "手机": "13800138000",
-      "邮箱": "job_hunter@example.com",
-      "微信号": "wechat_demo",
-      "现居地": "北京市海淀区",
-      "求职意向": "AI产品经理 / 算法工程师"
-    },
-    "基本信息": {
-      "姓名": "李明",
-      "性别": "男",
-      "出生年月": "1999-06",
-      "政治面貌": "共青团员",
-      "籍贯": "山东省济南市",
-      "紧急联系人": "李华 (13900139000)",
-      "自我评价": "具备扎实的AI技术认知与产品化落地经验，自驱力强，跨部门沟通流畅。"
-    },
+    "基本信息": [
+      ["姓名", "李明"],
+      ["性别", "男"],
+      ["出生年月", "1999-06"],
+      ["政治面貌", "共青团员"],
+      ["籍贯", "山东省济南市"],
+      ["紧急联系人", "李华 (父子 13900139000)"],
+      ["自我评价", "具备扎实的AI技术认知与产品化落地经验，深度理解大语言模型、多智能体交互机制。自驱力强，跨部门沟通流畅，多次主导高校与工业级产学研项目。"]
+    ],
+    "其他信息": [
+      ["身份证", "110101199801011234"],
+      ["手机", "13800138000"],
+      ["邮箱", "job_hunter@example.com"],
+      ["微信号", "wechat_demo"],
+      ["现居地", "北京市海淀区"],
+      ["求职意向", "AI产品经理 / 算法工程师"]
+    ],
     "教育经历": [
       {
         "_rowName": "硕士",
@@ -40,7 +45,8 @@
         "学历": "硕士研究生",
         "开始时间": "2023-09",
         "结束时间": "2026-06",
-        "导师": "张教授"
+        "导师": "张教授",
+        "专业排名": "前 5%"
       },
       {
         "_rowName": "本科",
@@ -49,7 +55,9 @@
         "专业": "软件工程",
         "学历": "本科",
         "开始时间": "2019-09",
-        "结束时间": "2023-06"
+        "结束时间": "2023-06",
+        "GPA": "3.85 / 4.0",
+        "荣誉": "国家励志奖学金、校优秀毕业生"
       }
     ],
     "实习经历": [
@@ -60,26 +68,77 @@
         "岗位": "AI产品经理实习生",
         "开始": "2025-06",
         "结束": "至今",
-        "岗位职责": "1. 主导智能广告生成 Agent 方案设计；\n2. 协同算法团队完成模型微调，CTR 提升 12.4%；\n3. 撰写多份高保真 PRD 与交互原型。"
+        "证明人": "王主管",
+        "证明人电话": "139XXXXXXXX",
+        "岗位职责": "1. 主导智能广告生成 Agent 方案设计，构建提示词工程与评估指标集；\n2. 协同算法团队完成模型微调与端到端延迟优化，CTR 提升 12.4%；\n3. 撰写多份高保真 PRD 与交互原型，推动敏捷迭代上线。",
+        "实习收获": "1. 深入理解商业化广告的业务逻辑与数据驱动决策方法；\n2. 系统掌握大模型产品化落地的全流程，从 Prompt 工程到模型评估；\n3. 提升了跨部门（算法/工程/运营）协同沟通能力。"
+      }
+    ],
+    "校园经历": [
+      {
+        "_rowName": "学生会",
+        "组织": "浙江大学计算机学院学生会",
+        "职务": "部长",
+        "开始": "2024-09",
+        "结束": "2025-06",
+        "主要工作": "1. 统筹举办学院科技文化节，覆盖 500+ 人次；\n2. 组织策划校企合作技术沙龙 8 场，对接字节跳动、阿里等企业。"
       }
     ],
     "项目经历": [
       {
-        "_rowName": "LLM Agent 平台",
+        "_rowName": "Multi-Agent 仿真系统",
         "项目名称": "基于大模型多智能体的自动化仿真与决策工作流平台",
         "角色": "核心负责人",
         "开始": "2024-09",
         "结束": "2025-05",
-        "主要工作": "设计认知层-技能层解耦架构，结合动态 Prompt 编排实现端到端自动化测试。"
+        "主要工作": "1. 设计认知层-技能层解耦架构，结合拓扑校验与动态 Prompt 编排实现手绘草图到工业仿真的端到端闭环；\n2. 提出基于质心的空间推理机制，弥合自然语言与抽象边界条件之间的语义差距；\n3. 投稿 SCI/EI 顶级期刊一篇 (Under Review)。",
+        "技术栈": "Python, LLM Agent, LangChain, Vue.js, FastAPI"
       }
     ],
-    "竞赛与技能": {
-      "英语水平": "CET-6 (598分)",
-      "专业技能": "Python, SQL, Figma, Prompt Engineering, Agent Architecture"
-    }
+    "奖励荣誉": [
+      {
+        "_rowName": "国家奖学金",
+        "获奖年月": "2024-10",
+        "荣誉名称": "国家奖学金",
+        "奖励级别": "国家级",
+        "说明": "综合成绩排名专业前1%，获教育部颁发国家奖学金"
+      },
+      {
+        "_rowName": "优秀毕业生",
+        "获奖年月": "2023-06",
+        "荣誉名称": "校优秀毕业生",
+        "奖励级别": "校级",
+        "说明": "本科期间综合表现优异，获评校级优秀毕业生荣誉称号"
+      }
+    ],
+    "家庭成员": [
+      {
+        "_rowName": "父亲",
+        "姓名": "李建国",
+        "与本人关系": "父子",
+        "出生年月": "1972-03",
+        "工作单位": "中国铁路济南局集团有限公司",
+        "职务": "高级工程师"
+      },
+      {
+        "_rowName": "母亲",
+        "姓名": "王秀英",
+        "与本人关系": "母子",
+        "出生年月": "1973-08",
+        "工作单位": "山东省济南市第一中学",
+        "职务": "英语教师"
+      }
+    ],
+    "技能证书": [
+      ["英语水平", "CET-6 (598分) / 英语流利"],
+      ["专业技能", "Python, SQL, Figma, Axure, Prompt Engineering, Agent Architecture"],
+      ["学术竞赛", "全国大学生数学建模竞赛一等奖、互联网+大学生创新创业大赛银奖"]
+    ],
+    "_sectionOrder": ["基本信息", "其他信息", "教育经历", "实习经历", "校园经历", "项目经历", "奖励荣誉", "家庭成员", "技能证书"]
   };
 
   let currentResumeData = DEFAULT_RESUME;
+  let resumeSectionOrder = DEFAULT_RESUME._sectionOrder || Object.keys(DEFAULT_RESUME).filter(k => !k.startsWith('_'));
   let lastFocusedEl = null;
   let lastSelectionStart = null;
   let lastSelectionEnd = null;
@@ -565,7 +624,7 @@
   // ================= 构建 DOM 结构 =================
   const wrapper = document.createElement('div');
   wrapper.innerHTML = `
-    <div id="aja-toggle" title="展开秋招求职助手 (Ctrl+Shift+F)">
+    <div id="aja-toggle" title="展开校园招聘助手 (${SHORTCUT_DISPLAY})">
       <span>📝</span>
       <span>简历助手</span>
     </div>
@@ -574,8 +633,8 @@
       <div class="drawer-header" id="aja-drag-handle">
         <div class="brand-area">
           <div class="brand-icon">🚀</div>
-          <div class="brand-title">秋招求职助手</div>
-          <span class="shortcut-badge">Ctrl+Shift+F</span>
+          <div class="brand-title">校园招聘助手</div>
+          <span class="shortcut-badge">${SHORTCUT_DISPLAY}</span>
         </div>
         <button class="close-btn" id="aja-close-btn" title="收起面板">✕</button>
       </div>
@@ -681,9 +740,10 @@
     if (!resume || typeof resume !== 'object') return;
     let html = '';
 
-    for (const [sectionName, sectionData] of Object.entries(resume)) {
+    for (const sectionName of resumeSectionOrder) {
+      const sectionData = resume[sectionName];
       if (!sectionData) continue;
-      const isDefaultOpen = sectionName === '优先信息';
+      const isDefaultOpen = sectionName === '基本信息';
       const collapsedClass = isDefaultOpen ? '' : 'collapsed';
 
       html += `
@@ -696,14 +756,11 @@
       `;
 
       if (Array.isArray(sectionData)) {
-        // 多段经历（如教育经历、实习、项目经历）
-        sectionData.forEach(item => {
+        if (sectionData.length > 0 && Array.isArray(sectionData[0])) {
+          // KV 数组格式：[[key, value], ...]
           html += `<div class="exp-row">`;
-          if (item._rowName) {
-            html += `<div class="exp-row-title">👉 ${item._rowName}</div>`;
-          }
-          for (const [k, v] of Object.entries(item)) {
-            if (k.startsWith('_') || v === undefined || v === null || v === '') continue;
+          for (const [k, v] of sectionData) {
+            if (v === undefined || v === null || v === '') continue;
             const strVal = String(v);
             html += `
               <button class="field-btn" data-val="${encodeURIComponent(strVal)}" title="${k}: ${strVal.replace(/"/g, '&quot;')}">
@@ -713,9 +770,28 @@
             `;
           }
           html += `</div>`;
-        });
+        } else {
+          // 多段经历（如教育经历、实习、项目经历）
+          sectionData.forEach(item => {
+            html += `<div class="exp-row">`;
+            if (item._rowName) {
+              html += `<div class="exp-row-title">👉 ${item._rowName}</div>`;
+            }
+            for (const [k, v] of Object.entries(item)) {
+              if (k.startsWith('_') || v === undefined || v === null || v === '') continue;
+              const strVal = String(v);
+              html += `
+                <button class="field-btn" data-val="${encodeURIComponent(strVal)}" title="${k}: ${strVal.replace(/"/g, '&quot;')}">
+                  <span class="field-key">${k}</span>
+                  <span class="field-val">${strVal}</span>
+                </button>
+              `;
+            }
+            html += `</div>`;
+          });
+        }
       } else if (typeof sectionData === 'object') {
-        // 普通对象模块（如基本信息、优先信息）
+        // 普通对象模块（兼容旧格式）
         html += `<div class="exp-row">`;
         for (const [k, v] of Object.entries(sectionData)) {
           if (v === undefined || v === null || v === '') continue;
@@ -743,6 +819,21 @@
         const res = await chrome.storage.local.get([RESUME_STORAGE_KEY]);
         if (res[RESUME_STORAGE_KEY]) {
           currentResumeData = res[RESUME_STORAGE_KEY];
+          if (currentResumeData._sectionOrder && Array.isArray(currentResumeData._sectionOrder)) {
+            resumeSectionOrder = currentResumeData._sectionOrder;
+          } else {
+            resumeSectionOrder = Object.keys(currentResumeData).filter(k => k !== '_sectionOrder');
+          }
+          let migrated = false;
+          ['其他信息', '基本信息', '技能证书'].forEach(sec => {
+            if (currentResumeData[sec] && !Array.isArray(currentResumeData[sec]) && typeof currentResumeData[sec] === 'object') {
+              currentResumeData[sec] = Object.entries(currentResumeData[sec]).map(([k, v]) => [k, v]);
+              migrated = true;
+            }
+          });
+          if (migrated) {
+            await chrome.storage.local.set({ [RESUME_STORAGE_KEY]: currentResumeData });
+          }
         }
       }
     } catch (e) {
@@ -752,13 +843,19 @@
   }
   loadResumeData();
 
-  // 监听 storage 变化（当用户在看板页面修改了简历，网页端实时刷新）
+  // 监听 storage 变化
   if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.onChanged) {
     chrome.storage.onChanged.addListener((changes, areaName) => {
-      if (areaName === 'local' && changes[RESUME_STORAGE_KEY]) {
+      if (areaName !== 'local') return;
+      if (changes[RESUME_STORAGE_KEY]) {
         currentResumeData = changes[RESUME_STORAGE_KEY].newValue || DEFAULT_RESUME;
-        renderResumeSections(currentResumeData);
+        if (currentResumeData._sectionOrder && Array.isArray(currentResumeData._sectionOrder)) {
+          resumeSectionOrder = currentResumeData._sectionOrder;
+        } else {
+          resumeSectionOrder = Object.keys(currentResumeData).filter(k => k !== '_sectionOrder');
+        }
       }
+      renderResumeSections(currentResumeData);
     });
   }
 
@@ -1197,9 +1294,9 @@
   toggleBtn.addEventListener('click', () => toggleDrawer(true));
   closeBtn.addEventListener('click', () => toggleDrawer(false));
 
-  // 快捷键 Ctrl+Shift+F
+  // 快捷键（Mac: Command+Shift+F, Windows: Ctrl+Shift+F）
   document.addEventListener('keydown', (e) => {
-    if (e.ctrlKey && e.shiftKey && (e.key === 'F' || e.key === 'f')) {
+    if ((e.metaKey || e.ctrlKey) && e.shiftKey && (e.key === 'F' || e.key === 'f')) {
       e.preventDefault();
       toggleDrawer();
     }
@@ -1446,18 +1543,26 @@
 
     // 1. 先将原数据所有已有键值存入 (支持用户自定义字段)
     for (const [sectionName, sectionData] of Object.entries(resume)) {
-      if (!sectionData) continue;
+      if (!sectionData || sectionName.startsWith('_')) continue;
       if (Array.isArray(sectionData)) {
-        sectionData.forEach((item, idx) => {
-          if (item && typeof item === 'object') {
-            for (const [k, v] of Object.entries(item)) {
-              if (k.startsWith('_') || v === undefined || v === null || v === '') continue;
-              const strVal = String(v).trim();
-              if (idx === 0 && !flatMap[k]) flatMap[k] = strVal;
-              flatMap[`${k}_${idx}`] = strVal;
-            }
+        if (sectionData.length > 0 && Array.isArray(sectionData[0])) {
+          // KV 数组格式：[[key, value], ...]
+          for (const [k, v] of sectionData) {
+            if (v === undefined || v === null || v === '') continue;
+            flatMap[k] = String(v).trim();
           }
-        });
+        } else {
+          sectionData.forEach((item, idx) => {
+            if (item && typeof item === 'object') {
+              for (const [k, v] of Object.entries(item)) {
+                if (k.startsWith('_') || v === undefined || v === null || v === '') continue;
+                const strVal = String(v).trim();
+                if (idx === 0 && !flatMap[k]) flatMap[k] = strVal;
+                flatMap[`${k}_${idx}`] = strVal;
+              }
+            }
+          });
+        }
       } else if (typeof sectionData === 'object') {
         for (const [k, v] of Object.entries(sectionData)) {
           if (v === undefined || v === null || v === '') continue;
@@ -2155,5 +2260,5 @@
     isDraggingToggle = false;
   });
 
-  console.log('🚀 [秋招求职与简历助手] Shadow DOM 侧边栏已挂载。按 Ctrl+Shift+F 唤起。');
+  console.log(`🚀 [校园招聘助手] Shadow DOM 侧边栏已挂载。按 ${SHORTCUT_DISPLAY} 唤起。`);
 })();
